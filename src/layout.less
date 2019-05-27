@@ -1,0 +1,64 @@
+
+* {
+  margin: 0; 
+  padding: 0; 
+}
+body {
+  background: rgba(238, 238, 238, 0.1);
+}
+.layout {
+  text-align: center;
+  display: inline-block;
+  margin: 5px; 
+  position: relative;
+}
+.wrap {
+  outline: 2px solid #000;
+  display: inline-block;
+  position: relative;
+}
+.row {
+  font-size: 0; 
+}
+
+.cell {
+  display: inline-block;
+  width: 33px;
+  height: 33px;
+  box-sizing: border-box;
+  border: 1px dashed #eee;
+}
+.cell[bg] {
+  background-color: #333;
+  border: 2px solid #aaa;
+  // outline: 1px solid #333;
+}
+
+
+.score {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0; 
+  width: 200px; 
+  height: 200px;
+  margin: auto;
+  font-size: 20px; 
+  color: #000;
+}
+
+.handleArea {
+  text-align: center;
+}
+.finaScroe {
+  position: fixed;
+  right: 10px; 
+  bottom: 0; 
+  color: red;
+}
+
+.btn {
+  padding: 3px 8px;
+  margin: 5px 10px;
+}
+
+
+
