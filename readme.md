@@ -7,7 +7,7 @@ https://fantastc.github.io/diamonds_eliminate/
 
 
 
-
+<img src="./doc/Animation.gif" > 
 
 
 
