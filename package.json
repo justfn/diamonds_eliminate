@@ -8,9 +8,11 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --host 0.0.0.0 --config ./webpack/config/dev.js",
-    "build": "webpack --config ./webpack/config/prod.js",
-    "copy:d": "copy /y .\\dist\\ F:\\repository\\display\\diamonds_eliminate\\",
-    "copy:n": "copy /y .\\dist\\ F:\\repository\\display\\diamonds_eliminate\\",
+    "clear": "for /d %x in (dist\\*) do @rd /s /q \"%x\"",
+    "dist": "webpack --config ./webpack/config/prod.js",
+    "build": "npm run clear && npm run dist",
+    "copy:d": "copy /y .\\dist\\ F:\\repository\\fantastc.github.io\\diamonds_eliminate\\",
+    "copy:n": "copy /y .\\dist\\ F:\\repository\\fantastc.github.io\\diamonds_eliminate\\",
     "output1": "npm run build && npm run copy:d",
     "output2": "npm run build && npm run copy:n",
     "test": "echo \"Error: no test specified\" && exit 1"
