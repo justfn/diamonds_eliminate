@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "dev": "webpack-dev-server --config ./webpack/config/dev.js",
+    "dev": "webpack-dev-server --host 0.0.0.0 --config ./webpack/config/dev.js",
     "build": "webpack --config ./webpack/config/prod.js",
     "copy:d": "copy /y .\\dist\\ F:\\repository\\display\\diamonds_eliminate\\",
     "copy:n": "copy /y .\\dist\\ F:\\repository\\display\\diamonds_eliminate\\",

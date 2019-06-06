@@ -5,7 +5,7 @@
 体验地址
 https://fantastc.github.io/diamonds_eliminate/
 
-
+控制键: 上 下 左 右 空格 
 
 <img src="./doc/Animation.gif" > 
 

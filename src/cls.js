@@ -12,11 +12,12 @@ function layoutInit(obj){
 }
 
 export class Layout {
-  constructor(rows,cols,time,gameWrap,isStart) {
+  constructor(rows,cols,time,elems,isStart) {
     this._rows = rows // 行数 
     this._cols = cols // 列数 
     this._time = time // 下落时间 
-    this._gameWrap = gameWrap // 
+    this._elems = elems; 
+    this._gameWrap = elems.wrap // 
     
     this.constructor.list.push( this ); 
     if (!isStart) { return this; }
@@ -305,8 +306,8 @@ export class Layout {
     
     
     // 启动游戏 
-    this.bindEvents();
-    gameWrap.appendChild(this.elem)
+    this.bindEvents(elems);
+    this._gameWrap.appendChild(this.elem)
     this.createBlock();
   }
   
@@ -320,18 +321,44 @@ export class Layout {
     
     return layoutEl;
   }
-  bindEvents(){
+  bindEvents({upBtn,ritBtn,btmBtn,lftBtn,fallBtn}){
     // 操作的映射 
-    this._evtHandler = (evt)=>{
-      // console.log(evt);
+    window.on("keydown",(evt)=>{
+      // console.log('keydown');
       let code = evt.code 
       if ( code!=='F5'&&code!=='F12') { evt.preventDefault(); }
       
       if (!this[code] || this.constructor.isGameOver ) { return ; }
       
       this[code](this.currentBlock,1);
-    }
-    window.addEventListener("keydown",this._evtHandler)
+    }); 
+    
+    upBtn.on("click",(evt)=>{
+      if ( this.constructor.isGameOver ) { return ; }
+      
+      this.ArrowUp(this.currentBlock)
+    })
+    ritBtn.on("click",(evt)=>{
+      if ( this.constructor.isGameOver ) { return ; }
+      
+      this.ArrowRight(this.currentBlock,1)
+    })
+    btmBtn.on("click",(evt)=>{
+      if ( this.constructor.isGameOver ) { return ; }
+      
+      this.ArrowDown(this.currentBlock,1)
+    })
+    lftBtn.on("click",(evt)=>{
+      if ( this.constructor.isGameOver ) { return ; }
+      
+      this.ArrowLeft(this.currentBlock,1)
+    })
+    fallBtn.on("click",(evt)=>{
+      // console.log('down');
+      if ( this.constructor.isGameOver ) { return ; }
+      
+      this.Space(this.currentBlock)
+    })
   }
   createBlock(){
     let blkRdm = getRandom(0,this.blocks.length-1)
@@ -578,17 +605,24 @@ export class Layout {
     _b(0,1)
   }
   
-  static bindGlobalEvents(startBtn,pauseBtn,addGame,finaScroe){
+  static bindGlobalEvents({startBtn,pauseBtn,addGame,finaScroe}){
     startBtn.addEventListener("click",(evt)=>{
       this.list.forEach((itm)=>{
         itm.elem && itm.elem.remove();
-        window.removeEventListener("keydown",itm._evtHandler)
+        
+        window.off("keydown");
+        let {upBtn,ritBtn,btmBtn,lftBtn,fallBtn} = itm._elems 
+        upBtn.off('click')
+        ritBtn.off('click')
+        btmBtn.off('click')
+        lftBtn.off('click')
+        fallBtn.off('click')
       })
       let instance = this.list[0];
       
       layoutInit(this); 
       finaScroe.textContent = '当前难度积分奖励系数为: 0'
-      new this(instance._rows, instance._cols, instance._time, instance._gameWrap, true);
+      new this(instance._rows, instance._cols, instance._time, instance._elems, true);
     })
     pauseBtn.addEventListener("click",(evt)=>{
       if ( this.isPause ) { pauseBtn.textContent = '暂停' }
@@ -612,28 +646,11 @@ export class Layout {
       }
       // 此时list中还未push,故不减一 
       finaScroe.textContent = `当前难度积分奖励系数为: ${this.list.length*this.hardLevel}` 
-      new this(instance._rows, instance._cols, instance._time, instance._gameWrap, true);
+      new this(instance._rows, instance._cols, instance._time, instance._elems, true);
     })
   }
 }
 layoutInit(Layout); 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
