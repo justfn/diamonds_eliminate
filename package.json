@@ -9,12 +9,10 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack/config/dev.js",
     "build": "webpack --config ./webpack/config/prod.js",
-    
     "copy:d": "copy /y .\\dist\\ F:\\repository\\display\\diamonds_eliminate\\",
     "copy:n": "copy /y .\\dist\\ F:\\repository\\display\\diamonds_eliminate\\",
     "output1": "npm run build && npm run copy:d",
     "output2": "npm run build && npm run copy:n",
-    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
