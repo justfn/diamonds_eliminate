@@ -8,14 +8,14 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --host 0.0.0.0 --config ./webpack/config/dev.js",
-    "clear": "for /d %x in (dist\\*) do @rd /s /q \"%x\"",
+    "clear": "del dist\\*.* /s /q",
     "dist": "webpack --config ./webpack/config/prod.js",
     "build": "npm run clear && npm run dist",
     "copy:d": "copy /y .\\dist\\ F:\\repository\\fantastc.github.io\\diamonds_eliminate\\",
-    "clear:d": "for /d %x in (F:\\repository\\fantastc.github.io\\diamonds_eliminate\\*) do @rd /s /q \"%x\"",
+    "clear:d": "del F:\\repository\\fantastc.github.io\\diamonds_eliminate\\*.* /s /q",
     "copy:n": "copy /y .\\dist\\ F:\\repository\\fantastc.github.io\\diamonds_eliminate\\",
-    "output1": "npm run build && npm run clear:d && npm run copy:d",
-    "output2": "npm run build && npm run copy:n",
+    "output:d": "npm run build && npm run clear:d && npm run copy:d",
+    "output:n": "npm run build && npm run copy:n",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
